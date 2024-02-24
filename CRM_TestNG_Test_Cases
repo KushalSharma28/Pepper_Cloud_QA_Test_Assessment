@@ -1,0 +1,57 @@
+package CRM;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+public class PepperCloud 
+{
+
+    WebDriver driver;
+
+    @BeforeTest
+    public void setup() 
+    {
+        // Initialize WebDriver
+    	  System.setProperty("webdriver.chrome.driver", "C:/Users/Supporting files/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void testHomepageTitle() 
+    {
+        // Navigate to the website
+        driver.get("https://demo.peppercloud.com/login");
+
+        // Get the page title
+        String SalesCRMloginPepperCloudCRM = driver.getTitle();
+
+        // Assert the expected title
+        Assert.assertEquals(SalesCRMloginPepperCloudCRM, "Sales CRM login | Pepper Cloud CRM");
+    }
+
+    @Test
+    public void testLoginFunctionality() 
+    {
+        // Navigate to the login page
+        driver.get("https://demo.peppercloud.com/login");
+
+        // Enter username and password 
+        driver.findElement(By.name("username")).sendKeys("qa-tester@peppercloud.io");
+		    driver.findElement(By.className("pc-login-btn")).click();
+		    driver.findElement(By.name("password")).sendKeys("Demo_PC*123");
+		
+        // Submit login form
+		    driver.findElement(By.className("pc-login-btn")).click();
+
+    }
+
+    @AfterTest
+    public void tearDown() 
+    {
+        driver.quit();
+    }
+}
