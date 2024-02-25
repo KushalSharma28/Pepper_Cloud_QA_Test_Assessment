@@ -34,19 +34,25 @@ public class PepperCloud
     }
 
     @Test
-    public void testLoginFunctionality() 
+    public void testLoginFunctionality() throws InterruptedException
     {
         // Navigate to the login page
         driver.get("https://demo.peppercloud.com/login");
 
         // Enter username and password 
         driver.findElement(By.name("username")).sendKeys("qa-tester@peppercloud.io");
-		    driver.findElement(By.className("pc-login-btn")).click();
-		    driver.findElement(By.name("password")).sendKeys("Demo_PC*123");
+	driver.findElement(By.className("pc-login-btn")).click();
+	driver.findElement(By.name("password")).sendKeys("Demo_PC*123");
 		
         // Submit login form
-		    driver.findElement(By.className("pc-login-btn")).click();
-
+	driver.findElement(By.className("pc-login-btn")).click();
+        Thread.sleep(20000);
+    }
+    @Test
+    public void testCreateUserFunctionality() throws InterruptedException 
+    {
+        // Test Create User Functionality
+	driver.findElement(By.xpath("//button[@id='LF1']")).click();	 
     }
 
     @AfterTest
